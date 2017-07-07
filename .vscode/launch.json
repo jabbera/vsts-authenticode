@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch branch task",
+            "program": "${workspaceRoot}\\Tasks\\authenticode-sign\\entry.js",
+            "cwd": "${workspaceRoot}\\Tasks\\authenticode-sign\\",
+            "outFiles": ["${workspaceRoot}\\Tasks\\authenticode-sign\\*.js"],
+            "sourceMaps": true,
+            "env": {
+                // "INPUT_TOOLLOCATION": "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe"
+                "INPUT_TIMESTAMPSERVER": "http://timestamp.digicert.com",
+                "INPUT_TIMESTAMPALGO": "sha256",
+                "INPUT_FILEALGO": "sha256",
+                "INPUT_FILEPATH": "c:\\temp\\*.dll",
+                "INPUT_RETRYCOUNT": "5",
+                "PROCESSOR_ARCHITECTURE": "x64"
+            }
+        }
+    ]
+}

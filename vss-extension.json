@@ -1,0 +1,61 @@
+{
+    "manifestVersion": 1,
+    "id": "authenticode-sign-task",
+    "name": "Authenticode Sign",
+    "version": "0.0.16",
+    "publisher": "jabbera",
+	"public": "true",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Task for authenticode signing executables.",
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [ "build", "sign", "authenticode", "authenticode sign", "signtool", "signcode" ],
+	 "content": {
+        "license": {
+            "path": "license"
+        },
+		"details": {
+			"path": "overview.md"
+		}
+    },
+	"screenshots": [
+	    {
+			"path": "screenshots/screenshot1.png"
+		},
+        {
+			"path": "screenshots/screenshot2.png"
+		}
+	],
+	"repository": {
+        "type":"git",
+        "uri": "https://github.com/jabbera/vsts-authenticode"
+    },
+    "icons": {
+        "default": "extension-icon.png"
+    },
+    "files": [
+        {
+            "path": "Tasks/authenticode-sign"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "authenticode-sign",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "Tasks/authenticode-sign"
+            }
+        }
+    ],
+	"galleryFlags": [
+		"Public"
+	]
+}

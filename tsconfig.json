@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "sourceMap": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "noEmitOnError": true,
+        "rootDirs": [
+            "Tasks/common",
+            "Tasks/authenticode-sign"
+        ]
+    },
+    "include": [
+        "Tasks/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "release"
+    ]
+}

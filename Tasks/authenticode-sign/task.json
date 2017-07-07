@@ -1,0 +1,56 @@
+{
+    "id": "752FE535-ED47-4C2C-AFCF-0778ADB0BB12",
+    "name": "authenticode-sign",
+    "friendlyName": "Authenticode Sign",
+    "description": "Authenticode sign executable code.",
+    "helpMarkDown": "",
+    "category": "Build",
+    "author": "Michael Barry",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 16
+    },
+    "instanceNameFormat": "Authenticode Sign",
+    "groups": [ 
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "filePath",
+            "type": "string",
+            "label": "Path to files to sign.",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path to files to sign. Can include wildcards",
+            "groupName": "advanced"
+        },
+        {
+            "name": "regexFlags",
+            "type": "string",
+            "label": "Regex Flags",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "The flags to the regex. Default is: g",
+            "groupName": "advanced"
+        },
+        {
+            "name": "replacePattern",
+            "type": "string",
+            "label": "Sample String",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "The replacement patten corresponding to the regex above. Default is empty string",
+            "groupName": "advanced"
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "entry.js"
+        }
+    }
+}
