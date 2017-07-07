@@ -26,25 +26,59 @@
             "label": "Path to files to sign.",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to files to sign. Can include wildcards",
+            "helpMarkDown": "Path to files to sign. Can include wildcards"
+        },
+        {
+            "name": "signToolLocation",
+            "type": "string",
+            "label": "Sign Tool Location",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Location of custom signtool.exe",
             "groupName": "advanced"
         },
         {
-            "name": "regexFlags",
+            "name": "timestampServer",
             "type": "string",
-            "label": "Regex Flags",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "The flags to the regex. Default is: g",
+            "label": "Timestamp Url",
+            "defaultValue": "http://timestamp.digicert.com",
+            "required": true,
+            "helpMarkDown": "Url to RFC 3161 compatibable timestamp server.",
             "groupName": "advanced"
         },
         {
-            "name": "replacePattern",
+            "name": "timestampAlgo",
+            "type": "pickList",
+            "label": "Timestamp Digest Algo",
+            "defaultValue": "sha256",
+            "required": true,
+            "helpMarkDown": "Digest algo for timestamping.",
+             "options": {
+                "sha256": "sha256",
+                "sha1": "sha1"
+            },
+            "groupName": "advanced"
+        },
+        {
+            "name": "fileAlgo",
+            "type": "pickList",
+            "label": "File Digest Algo",
+            "defaultValue": "sha256",
+            "required": true,
+            "helpMarkDown": "Digest algo for file signature.",
+             "options": {
+                "sha256": "sha256",
+                "sha1": "sha1"
+            },
+            "groupName": "advanced"
+        },
+        {
+            "name": "retryCount",
             "type": "string",
-            "label": "Sample String",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "The replacement patten corresponding to the regex above. Default is empty string",
+            "label": "Retry count",
+            "defaultValue": "http://timestamp.digicert.com",
+            "required": true,
+            "helpMarkDown": "Number of times to retry the signature.",
             "groupName": "advanced"
         }
     ],

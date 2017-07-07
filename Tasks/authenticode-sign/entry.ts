@@ -34,6 +34,10 @@ async function run() {
 
 }
 
+function blah(): string {
+    
+}
+
 function getSignToolLocation(): string {
     let toolLocation: string = tl.getInput("toolLocation", false);
     if (toolLocation != null && toolLocation != "") {

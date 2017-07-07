@@ -1,17 +1,17 @@
 {
-  "name": "git-tag-on-release-task",
+  "name": "vsts-authenticode",
   "version": "1.0.0",
-  "description": "VSTS extension to tag or branch git repos",
+  "description": "VSTS extension to authenticode sign",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jabbera/vsts-git-release-tag.git"
+    "url": "git+https://github.com/jabbera/vsts-authenticode"
   },
   "author": "Michael Barry",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jabbera/vsts-git-release-tag/issues"
+    "url": "https://github.com/jabbera/vsts-authenticode/issues"
   },
-  "homepage": "https://github.com/jabbera/vsts-git-release-tag#readme",
+  "homepage": "https://github.com/jabbera/vsts-authenticode#readme",
   "devDependencies": {
     "@types/node": "^7.0.18",
     "gulp": "^3.9.1",

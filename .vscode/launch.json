@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch branch task",
+            "name": "Launch task",
             "program": "${workspaceRoot}\\Tasks\\authenticode-sign\\entry.js",
             "cwd": "${workspaceRoot}\\Tasks\\authenticode-sign\\",
             "outFiles": ["${workspaceRoot}\\Tasks\\authenticode-sign\\*.js"],

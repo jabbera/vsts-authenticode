@@ -1,11 +1,11 @@
 {
-  "name": "git-tag-on-release-task",
+  "name": "vsts-authenticode",
   "version": "0.0.7",
-  "description": "vsts release notes task",
+  "description": "vsts authenticode sign task",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jabbera/vsts-git-release-tag.git"
+    "url": "git+https://github.com/jabbera/vsts-authenticode"
   },
   "author": "",
   "license": "MIT",
