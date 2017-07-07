@@ -80,6 +80,37 @@
             "required": true,
             "helpMarkDown": "Number of times to retry the signature.",
             "groupName": "advanced"
+        },
+        {
+            "name": "certificateLocation",
+            "type": "pickList",
+            "label": "File Digest Algo",
+            "defaultValue": "computerStore",
+            "required": true,
+            "helpMarkDown": "Digest algo for file signature.",
+            "options": {
+                "computerStore": "Computer Store",
+                "userStore": "User Store",
+                "pfxFile": "Pfx File"
+            }
+        },
+        {
+            "name": "pfxFile",
+            "type": "string",
+            "label": "Pfx File",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Pfx File for signing.",
+            "visibleRule": "certificateLocation = pfxFile"
+        },
+        {
+            "name": "pfxPassword",
+            "type": "string",
+            "label": "Pfx Password",
+            "defaultValue": "Pfx Password",
+            "required": true,
+            "helpMarkDown": "Pfx Password.",
+            "visibleRule": "certificateLocation = pfxFile"
         }
     ],
     "execution": {
