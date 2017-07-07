@@ -3,15 +3,17 @@ import * as tr from "vsts-task-lib/ToolRunner";
 
 async function run() {
     let signToolLocation: string = getSignToolLocation();
-    let timestampServer: string = tl.getInput("timestampServer", true);
-    let timestampAlgo: string = tl.getInput("timestampAlgo", true);
-    let fileAlgo: string = tl.getInput("fileAlgo", true);
-    let filePath: string = tl.getInput("filePath", true);
     let retryCount: number = Number(tl.getInput("retryCount", true));
 
     let signtool: tr.ToolRunner = new tr.ToolRunner(signToolLocation);
     
-    signtool.arg([ "sign", "/tr", timestampServer, "/td", timestampAlgo, "/fd", fileAlgo, "/a", filePath ]);
+    let signtoolArguments: string[] = ["sign"];
+
+    pushTimestampArgs(signtoolArguments);
+    pushCertArgs(signtoolArguments);
+    pushFileArgs(signtoolArguments);    
+
+    signtool.arg(signtoolArguments);
 
     let i: number = 0;
     
@@ -31,8 +33,55 @@ async function run() {
             }
         }
     }
-
 }
+
+function pushTimestampArgs(args: string[]) {
+    let timestampServer: string = tl.getInput("timestampServer", true);
+    let timestampAlgo: string = tl.getInput("timestampAlgo", true);
+
+    args.push("/tr", timestampServer, "/td", timestampAlgo);
+}
+
+function pushCertArgs(args: string[]) {
+    let certificateLocation: string = tl.getInput("certificateLocation", true);
+    if (certificateLocation == "computerStore") {
+        return; // Nothing to do.
+    }
+
+    if (certificateLocation == "userStore") {
+        args.push("/sm");
+    }
+
+    if (certificateLocation != "pfxFile") {
+        tl.setResult(tl.TaskResult.Failed, `Unknown cert location: ${certificateLocation}`);
+    }
+
+    let pfxLocation: string = tl.getPathInput("pfxPath", true);
+    if (pfxLocation == null || pfxLocation == '') {
+        let error: string = "Pfx Location not set.";
+        tl.setResult(tl.TaskResult.Failed, error);
+        throw error;
+    }
+
+    tl.checkPath(pfxLocation, "pfxfile");
+
+    let pfxPassword: string = tl.getInput("pfxPassword");
+    if (pfxPassword == null || pfxPassword == '') {
+        let error: string = "Pfx Password not set.";
+        tl.setResult(tl.TaskResult.Failed, error);
+        throw error;
+    }
+
+    args.push("/f", pfxLocation, "/p", pfxPassword);
+}
+
+function pushFileArgs(args: string[]) {
+    let fileAlgo: string = tl.getInput("fileAlgo", true);
+    let filePath: string = tl.getInput("filePath", true);
+
+    args.push("/fd", fileAlgo, "/a", filePath);
+}
+
 function getSignToolLocation(): string {
     let toolLocation: string = tl.getInput("toolLocation", false);
     if (toolLocation != null && toolLocation != "") {

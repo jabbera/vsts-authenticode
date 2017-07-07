@@ -19,6 +19,9 @@
                 "INPUT_FILEALGO": "sha256",
                 "INPUT_FILEPATH": "c:\\temp\\*.dll",
                 "INPUT_RETRYCOUNT": "5",
+                "INPUT_CERTIFICATELOCATION": "computerStore",
+                "INPUT_PFXPATH": "c:\\temp\\code.pfx",
+                //"INPUT_PFXPASSWORD": "passwordhere",
                 "PROCESSOR_ARCHITECTURE": "x64"
             }
         }

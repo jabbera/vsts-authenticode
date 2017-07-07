@@ -96,7 +96,7 @@
         },
         {
             "name": "pfxFile",
-            "type": "string",
+            "type": "filePath",
             "label": "Pfx File",
             "defaultValue": "",
             "required": true,
