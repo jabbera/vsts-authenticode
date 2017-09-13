@@ -76,7 +76,7 @@
             "name": "retryCount",
             "type": "string",
             "label": "Retry count",
-            "defaultValue": "http://timestamp.digicert.com",
+            "defaultValue": "5",
             "required": true,
             "helpMarkDown": "Number of times to retry the signature.",
             "groupName": "advanced"
@@ -107,7 +107,7 @@
             "name": "pfxPassword",
             "type": "string",
             "label": "Pfx Password",
-            "defaultValue": "Pfx Password",
+            "defaultValue": "",
             "required": true,
             "helpMarkDown": "Pfx Password.",
             "visibleRule": "certificateLocation = pfxFile"
