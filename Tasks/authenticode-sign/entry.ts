@@ -1,35 +1,50 @@
 import * as tr from "vsts-task-lib/ToolRunner";
 import * as tl from "vsts-task-lib/task";
+import * as sf from "./SecureFileHelpers";
 
+let secureFileId: string = null;
+let secureFileHelpers: sf.SecureFileHelpers = null;
 async function run() {
-    let signToolLocation: string = getSignToolLocation();
-    let retryCount: number = Number(tl.getInput("retryCount", true));
+    try {
+        let signToolLocation: string = getSignToolLocation();
+        let retryCount: number = Number(tl.getInput("retryCount", true));
 
-    let signtool: tr.ToolRunner = new tr.ToolRunner(signToolLocation);
+        let signtool: tr.ToolRunner = new tr.ToolRunner(signToolLocation);
 
-    let signtoolArguments: string[] = ["sign"];
+        let signtoolArguments: string[] = ["sign"];
 
-    pushTimestampArgs(signtoolArguments);
-    pushCertArgs(signtoolArguments);
-    pushFileArgs(signtoolArguments);
+        pushTimestampArgs(signtoolArguments);
 
-    signtool.arg(signtoolArguments);
+        await pushCertArgs(signtoolArguments);
+        pushFileArgs(signtoolArguments);
 
-    let i: number = 0;
+        signtool.arg(signtoolArguments);
 
-    // sometime timestamp servers don't reponse
-    while (true) {
-        try {
-            let exitCode: number = await signtool.exec();
-            tl.debug(`Exit code: ${exitCode}`);
-            break;
-        }
-        catch (e) {
-            console.log(`Error attempting to sign. Attempt number: ${i++}. Exception text: ${e}`);
-            if (i === retryCount) {
-                tl.setResult(tl.TaskResult.Failed, `Unable to sign ${e}`);
-                throw e;
+        let i: number = 0;
+
+        // sometime timestamp servers don't reponse
+        while (true) {
+            try {
+                let exitCode: number = await signtool.exec();
+                tl.debug(`Exit code: ${exitCode}`);
+                break;
             }
+            catch (e) {
+                console.log(`Error attempting to sign. Attempt number: ${i++}. Exception text: ${e}`);
+                if (i === retryCount) {
+                    tl.setResult(tl.TaskResult.Failed, `Unable to sign ${e}`);
+                    throw e;
+                }
+            }
+        }
+    }
+    catch (e) {
+        tl.setResult(tl.TaskResult.Failed, `Unable to sign ${e}`);
+        throw e;
+    }
+    finally {
+        if (secureFileId && secureFileHelpers) {
+            secureFileHelpers.deleteSecureFile(secureFileId);
         }
     }
 }
@@ -41,7 +56,7 @@ function pushTimestampArgs(args: string[]) {
     args.push("/tr", timestampServer, "/td", timestampAlgo);
 }
 
-function pushCertArgs(args: string[]) {
+async function pushCertArgs(args: string[]) {
     let certificateLocation: string = tl.getInput("certificateLocation", true);
     if (certificateLocation === "computerStore") {
         return; // Nothing to do.
@@ -49,15 +64,22 @@ function pushCertArgs(args: string[]) {
 
     if (certificateLocation === "userStore") {
         args.push("/sm");
+        return;
     }
 
-    if (certificateLocation !== "pfxFile") {
-        tl.setResult(tl.TaskResult.Failed, `Unknown cert location: ${certificateLocation}`);
+    let pfxLocation: string = null;
+    if (certificateLocation === "pfxFile") {
+        pfxLocation = tl.getPathInput("pfxFile", true);
     }
 
-    let pfxLocation: string = tl.getPathInput("pfxPath", true);
+    if (certificateLocation === "secureFile") {
+        secureFileId = tl.getInput("pfxSecureFile", true);
+        secureFileHelpers = new sf.SecureFileHelpers();
+        pfxLocation = await secureFileHelpers.downloadSecureFile(secureFileId);
+    }
+
     if (pfxLocation == null || pfxLocation === "") {
-        let error: string = "Pfx Location not set.";
+        let error: string = `Pfx Location not set. certificateLoation:'${certificateLocation}'`;
         tl.setResult(tl.TaskResult.Failed, error);
         throw error;
     }

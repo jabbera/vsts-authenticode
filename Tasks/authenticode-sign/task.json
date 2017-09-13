@@ -84,14 +84,15 @@
         {
             "name": "certificateLocation",
             "type": "pickList",
-            "label": "File Digest Algo",
+            "label": "Certificate Location",
             "defaultValue": "computerStore",
             "required": true,
             "helpMarkDown": "Digest algo for file signature.",
             "options": {
                 "computerStore": "Computer Store",
                 "userStore": "User Store",
-                "pfxFile": "Pfx File"
+                "pfxFile": "Pfx File",
+                "secureFile": "Secure File"
             }
         },
         {
@@ -104,13 +105,22 @@
             "visibleRule": "certificateLocation = pfxFile"
         },
         {
+            "name": "pfxSecureFile",
+            "type": "secureFile",
+            "label": "Pfx Secure File",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Pfx Secure File.",
+            "visibleRule": "certificateLocation = secureFile"
+        },
+        {
             "name": "pfxPassword",
             "type": "string",
             "label": "Pfx Password",
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Pfx Password.",
-            "visibleRule": "certificateLocation = pfxFile"
+            "visibleRule": "certificateLocation = pfxFile || certificateLocation = secureFile"
         }
     ],
     "execution": {

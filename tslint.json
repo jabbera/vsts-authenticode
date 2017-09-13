@@ -1,5 +1,8 @@
 {
     "rules": {
+        "await-promise": true,
+        "no-floating-promises": true,
+        "no-unused-expression": true,
         "array-type": [
             true,
             "array-simple"
