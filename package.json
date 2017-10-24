@@ -18,11 +18,12 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-typescript": "^3.1.7",
     "tfx-cli": "^0.4.5",
-    "tslint": "^5.2.0",
-    "typescript": "^2.3.4",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
     "yargs": "^8.0.2"
   },
   "dependencies": {
-    "vsts-task-lib": "^2.0.5"
+    "vso-node-api": "^6.2.8-preview",
+    "vsts-task-lib": "^2.1.0"
   }
 }
