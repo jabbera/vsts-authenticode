@@ -98,9 +98,10 @@ async function pushCertArgs(args: string[]) {
 
 function pushFileArgs(args: string[]) {
     let fileAlgo: string = tl.getInput("fileAlgo", true);
-    let filePath: string = tl.getInput("filePath", true);
+    let filePaths: string[] = tl.getDelimitedInput('filePaths', '\n', true);
 
-    args.push("/fd", fileAlgo, "/a", filePath);
+    args.push("/fd", fileAlgo, "/a");
+    Array.prototype.push.apply(args, filePaths);
 }
 
 function getSignToolLocation(): string {

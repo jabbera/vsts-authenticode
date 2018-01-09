@@ -7,9 +7,9 @@
     "category": "Build",
     "author": "Michael Barry",
     "version": {
-        "Major": 0,
-        "Minor": 0,
-        "Patch": 16
+        "Major": 1,
+        "Minor": 1,
+        "Patch": 0
     },
     "instanceNameFormat": "Authenticode Sign",
     "groups": [ 
@@ -21,12 +21,16 @@
     ],
     "inputs": [
         {
-            "name": "filePath",
-            "type": "string",
-            "label": "Path to files to sign.",
+            "name": "filePaths",
+            "type": "multiLine",
+            "label": "Paths to files to sign.",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to files to sign. Can include wildcards"
+            "helpMarkDown": "Paths to files to sign. Can include wildcards",
+            "properties": {
+                "resizable": "true",
+                "rows": "10"
+            }
         },
         {
             "name": "signToolLocation",
