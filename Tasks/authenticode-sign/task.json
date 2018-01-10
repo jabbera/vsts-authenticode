@@ -21,12 +21,16 @@
     ],
     "inputs": [
         {
-            "name": "filePath",
-            "type": "string",
-            "label": "Path to files to sign.",
+            "name": "filePaths",
+            "type": "multiLine",
+            "label": "Paths to files to sign.",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to files to sign. Can include wildcards"
+            "helpMarkDown": "Paths to files to sign. Can include wildcards",
+            "properties": {
+                "resizable": "true",
+                "rows": "10"
+            }
         },
         {
             "name": "signToolLocation",
