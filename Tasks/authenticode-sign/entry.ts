@@ -59,12 +59,12 @@ function pushTimestampArgs(args: string[]) {
 async function pushCertArgs(args: string[]) {
     let certificateLocation: string = tl.getInput("certificateLocation", true);
     if (certificateLocation === "computerStore") {
-        args.push("/sm");
-        return;
+        return; // Nothing to do.
     }
 
     if (certificateLocation === "userStore") {
-        return; // Nothing to do.
+        args.push("/sm");
+        return;
     }
 
     let pfxLocation: string = null;
