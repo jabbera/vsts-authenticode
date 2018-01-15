@@ -24,6 +24,20 @@
                 //"INPUT_PFXPASSWORD": "passwordhere",
                 "PROCESSOR_ARCHITECTURE": "x64"
             }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "L0 Tests",
+            "program": "${workspaceRoot}\\node_modules/mocha/bin/_mocha",
+            "stopOnEntry": false,
+            "sourceMaps": true,
+            "cwd": "${workspaceRoot}\\Tasks\\authenticode-sign\\",
+            "args": ["--no-timeouts", "--colors", "-r", "ts-node/register", "${workspaceRoot}\\Tasks\\authenticode-sign\\Tests\\L0.ts"],
+            "env": {
+                "NODE_ENV": "testing",
+                "TASK_TEST_TRACE": "true"
+            }
         }
     ]
 }

@@ -104,9 +104,10 @@ function pushFileArgs(args: string[]) {
 }
 
 function getSignToolLocation(): string {
-    let toolLocation: string = tl.getInput("toolLocation", false);
+    let toolLocation: string = tl.getInput("signToolLocation", false);
     if (toolLocation != null && toolLocation !== "") {
         tl.debug(`custom signtool location: ${toolLocation}`);
+        tl.checkPath(toolLocation, "custom tool location");
         return toolLocation;
     }
 

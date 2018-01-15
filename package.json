@@ -13,11 +13,16 @@
   },
   "homepage": "https://github.com/jabbera/vsts-authenticode#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.0",
+    "@types/mocha": "^2.2.46",
     "@types/node": "^7.0.18",
+    "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-typescript": "^3.1.7",
+    "mocha": "^4.1.0",
     "tfx-cli": "^0.4.5",
+    "ts-node": "^4.1.0",
     "tslint": "^5.7.0",
     "typescript": "^2.5.2",
     "yargs": "^8.0.2"
