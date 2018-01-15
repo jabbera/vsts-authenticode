@@ -6,31 +6,27 @@ import tmrm = require("vsts-task-lib/mock-run");
 const taskPath = path.join(__dirname, "..", "entry.js");
 const tr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 
-tr.setInput("signToolLocation", "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe");
+tr.setInput("signToolLocation", "C:\\signtool.exe");
 tr.setInput("retryCount", "1");
 tr.setInput("timestampServerDelay", "1");
 tr.setInput("timestampServer", "http://timestamp.digicert.com");
 tr.setInput("timestampAlgo", "sha256");
 tr.setInput("fileAlgo", "sha256");
-tr.setInput("certificateLocation", "pfxFile");
-tr.setInput("pfxFile", "c:\\vsts-authenticode\\Test\\a.pfx");
-tr.setInput("pfxPassword", "password");
-tr.setInput("filePath", "**/*.exe\n**/*.dll");
+tr.setInput("certificateLocation", "computerStore");
+tr.setInput("certificateSelectionMethod", "sha1");
+tr.setInput("certificateThumbprint", "thumbprint");
+tr.setInput("filePath", "doesntmatter");
 tr.setInput("signRootPath", "c:\\temp temp");
 
 let a: ma.TaskLibAnswers = <ma.TaskLibAnswers>{
     "checkPath" : {
-        "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe": true,
-        "c:\\vsts-authenticode\\Test\\a.pfx": true,
+        "C:\\signtool.exe": true,
     },
     "findMatch": {
-        "**/*.exe\n**/*.dll": [
-            "c:\\temp temp\\a.dll",
-            "c:\\temp temp\\b.exe",
-        ],
+        "doesntmatter": [ "doesntmatter" ],
     },
     "exec": {
-        "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe sign /tr http://timestamp.digicert.com /td sha256 /f c:\\vsts-authenticode\\Test\\a.pfx /p password /fd sha256 \"c:\\temp temp\\a.dll\" \"c:\\temp temp\\b.exe\"": {
+        "C:\\signtool.exe sign /tr http://timestamp.digicert.com /td sha256 /sm /sha1 thumbprint /fd sha256 \"doesntmatter\"": {
             "code": 0,
             "stdout": "",
             "stderr": "",

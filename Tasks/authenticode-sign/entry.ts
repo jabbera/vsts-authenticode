@@ -60,15 +60,31 @@ function pushTimestampArgs(args: string[]) {
     args.push("/tr", timestampServer, "/td", timestampAlgo);
 }
 
+function pushCertStoreArgs(certificateLocation: string, args: string[]): boolean {
+    switch (certificateLocation) {
+        case "computerStore":
+            args.push("/sm");
+        case "userStore":
+            let certificateSelectionMethod: string = tl.getInput("certificateSelectionMethod", true);
+            if (certificateSelectionMethod === "auto") {
+                args.push("/a");
+            }
+
+            if (certificateSelectionMethod === "sha1") {
+                args.push("/sha1", tl.getInput("certificateThumbprint", true));
+            }
+
+            return true;
+        default:
+            return false;
+    }
+}
+
 async function pushCertArgs(args: string[]) {
     let certificateLocation: string = tl.getInput("certificateLocation", true);
-    if (certificateLocation === "computerStore") {
-        args.push("/sm");
+    if (pushCertStoreArgs(certificateLocation, args)) {
+        // Handled by the above method
         return;
-    }
-
-    if (certificateLocation === "userStore") {
-        return; // Nothing to do.
     }
 
     let pfxLocation: string = null;
@@ -115,7 +131,7 @@ function pushFileArgs(args: string[]) {
     let matchedFiles: string[] = tl.findMatch(rootPath, filePath, null, options);
      matchedFiles = matchedFiles.map((x) => `"${x}"`);
 
-    args.push("/fd", fileAlgo, "/a");
+    args.push("/fd", fileAlgo);
 
     Array.prototype.push.apply(args, matchedFiles);
 }

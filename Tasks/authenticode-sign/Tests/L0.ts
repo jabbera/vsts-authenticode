@@ -36,7 +36,29 @@ describe("Authenticode sign test suite", () => {
 
     testRunner.run();
 
-    expect(testRunner.stdOutContained("\"c:\\temp temp\\a.dll\" \"c:\\temp temp\\b.exe\"")).true;
+    expect(testRunner.succeeded).true;
+
+    done();
+  });
+
+  it("auto certificate selection works", (done) => {
+    const testPath: string = path.join(__dirname, "L0CertificateSelectionAuto.js");
+    const testRunner: ttm.MockTestRunner = new ttm.MockTestRunner(testPath);
+
+    testRunner.run();
+
+    expect(testRunner.succeeded).true;
+
+    done();
+  });
+
+  it("sha1 certificate selection works", (done) => {
+    const testPath: string = path.join(__dirname, "L0CertificateSelectionSha1.js");
+    const testRunner: ttm.MockTestRunner = new ttm.MockTestRunner(testPath);
+
+    testRunner.run();
+
+    expect(testRunner.succeeded).true;
 
     done();
   });

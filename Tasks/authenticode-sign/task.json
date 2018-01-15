@@ -103,13 +103,34 @@
             "label": "Certificate Location",
             "defaultValue": "computerStore",
             "required": true,
-            "helpMarkDown": "Digest algo for file signature.",
+            "helpMarkDown": "Location of the signing certificate.",
             "options": {
                 "computerStore": "Computer Store",
                 "userStore": "User Store",
                 "pfxFile": "Pfx File",
                 "secureFile": "Secure File"
             }
+        },
+        {
+            "name": "certificateSelectionMethod",
+            "type": "pickList",
+            "label": "Certificate Selection Method",
+            "defaultValue": "auto",
+            "required": false,
+            "helpMarkDown": "Method of certificate selection from store.",
+            "options": {
+                "auto": "auto",
+                "sha1": "sha1"
+            },
+            "visibleRule": "certificateLocation = computerStore || certificateLocation = userStore"
+        },
+        {
+            "name": "certificateThumbprint",
+            "type": "string",
+            "label": "Certificate Thumprint",
+            "required": false,
+            "helpMarkDown": "Sha1 thumprint of certificate to use.",
+            "visibleRule": "certificateSelectionMethod = sha1"
         },
         {
             "name": "pfxFile",

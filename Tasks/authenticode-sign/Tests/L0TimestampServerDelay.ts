@@ -13,6 +13,7 @@ tr.setInput("timestampServer", "http://tsserver.com");
 tr.setInput("timestampAlgo", "sha256");
 tr.setInput("fileAlgo", "sha256");
 tr.setInput("certificateLocation", "computerStore");
+tr.setInput("certificateSelectionMethod", "auto");
 tr.setInput("filePath", "doesntmatter");
 tr.setInput("signRootPath", "c:\\temp");
 
@@ -24,7 +25,7 @@ let a: ma.TaskLibAnswers = <ma.TaskLibAnswers>{
         "doesntmatter": ["doesntmatter"],
     },
     "exec": {
-        "c:\\signtool.exe sign /tr http://tsserver.com /td sha256 /sm /fd sha256 /a doesntmatter": {
+        "c:\\signtool.exe sign /tr http://tsserver.com /td sha256 /sm /a /fd sha256 \"doesntmatter\"": {
             "code": 1,
             "stdout": "",
             "stderr": "",
