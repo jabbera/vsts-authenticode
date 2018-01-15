@@ -30,4 +30,15 @@ describe("Authenticode sign test suite", () => {
     done();
   });
 
+  it("minimatch appends properly works", (done) => {
+    const testPath: string = path.join(__dirname, "L0MinimatchAppended.js");
+    const testRunner: ttm.MockTestRunner = new ttm.MockTestRunner(testPath);
+
+    testRunner.run();
+
+    expect(testRunner.stdOutContained("\"c:\\temp temp\\a.dll\" \"c:\\temp temp\\b.exe\"")).true;
+
+    done();
+  });
+
 });

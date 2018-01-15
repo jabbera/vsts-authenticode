@@ -102,9 +102,22 @@ async function pushCertArgs(args: string[]) {
 
 function pushFileArgs(args: string[]) {
     let fileAlgo: string = tl.getInput("fileAlgo", true);
-    let filePath: string = tl.getInput("filePath", true);
+    let filePath: string[] = tl.getDelimitedInput("filePath", "\n", true);
+    let rootPath: string = tl.getInput("signRootPath", true);
 
-    args.push("/fd", fileAlgo, "/a", filePath);
+    let options: tl.MatchOptions = {
+        debug: Boolean(tl.getVariable("system.debug")),
+        dot: true,
+        nobrace: true,
+        nocase: process.platform === "win32",
+    };
+
+    let matchedFiles: string[] = tl.findMatch(rootPath, filePath, null, options);
+     matchedFiles = matchedFiles.map((x) => `"${x}"`);
+
+    args.push("/fd", fileAlgo, "/a");
+
+    Array.prototype.push.apply(args, matchedFiles);
 }
 
 function getSignToolLocation(): string {

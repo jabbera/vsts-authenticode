@@ -14,10 +14,14 @@ tr.setInput("timestampAlgo", "sha256");
 tr.setInput("fileAlgo", "sha256");
 tr.setInput("certificateLocation", "computerStore");
 tr.setInput("filePath", "doesntmatter");
+tr.setInput("signRootPath", "c:\\temp");
 
 let a: ma.TaskLibAnswers = <ma.TaskLibAnswers>{
     "checkPath" : {
         "c:\\signtool.exe": true,
+    },
+    "findMatch": {
+        "doesntmatter": ["doesntmatter"],
     },
     "exec": {
         "c:\\signtool.exe sign /tr http://tsserver.com /td sha256 /sm /fd sha256 /a doesntmatter": {

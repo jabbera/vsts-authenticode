@@ -22,11 +22,19 @@
     "inputs": [
         {
             "name": "filePath",
-            "type": "string",
-            "label": "Path to files to sign.",
+            "type": "multiLine",
+            "label": "Files to sign",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Path to files to sign. Can include wildcards"
+            "helpMarkDown": "Minimatch pattern of files to sign."
+        },
+        {
+            "name": "signRootPath",
+            "type": "string",
+            "label": "Signing root path.",
+            "defaultValue": "$(Build.ArtifactStagingDirectory)",
+            "required": true,
+            "helpMarkDown": "The root to apply the minimatch pattern to in order to find files to sign."
         },
         {
             "name": "signToolLocation",
