@@ -19,4 +19,15 @@ describe("Authenticode sign test suite", () => {
     done();
   });
 
+  it("timestamp server delay works", (done) => {
+    const testPath: string = path.join(__dirname, "L0TimestampServerDelay.js");
+    const testRunner: ttm.MockTestRunner = new ttm.MockTestRunner(testPath);
+
+    testRunner.run();
+
+    expect(testRunner.stdout).contains("Sleeping for 1 second(s)");
+
+    done();
+  });
+
 });

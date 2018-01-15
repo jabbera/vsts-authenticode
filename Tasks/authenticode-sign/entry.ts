@@ -1,5 +1,5 @@
-import * as tr from "vsts-task-lib/ToolRunner";
 import * as tl from "vsts-task-lib/task";
+import * as tr from "vsts-task-lib/toolrunner";
 import * as sf from "./SecureFileHelpers";
 
 let secureFileId: string = null;
@@ -8,6 +8,7 @@ async function run() {
     try {
         let signToolLocation: string = getSignToolLocation();
         let retryCount: number = Number(tl.getInput("retryCount", true));
+        let timestampServerDelay: number = Number(tl.getInput("timestampServerDelay", true));
 
         let signtool: tr.ToolRunner = new tr.ToolRunner(signToolLocation);
 
@@ -31,7 +32,10 @@ async function run() {
             }
             catch (e) {
                 console.log(`Error attempting to sign. Attempt number: ${i++}. Exception text: ${e}`);
-                if (i === retryCount) {
+
+                await sleepFor(timestampServerDelay);
+
+                if (i >= retryCount) {
                     tl.setResult(tl.TaskResult.Failed, `Unable to sign ${e}`);
                     throw e;
                 }
@@ -152,5 +156,14 @@ function getPlatformFolder(): string {
 
     return folder;
 }
+
+async function sleepFor(sleepDurationInSeconds): Promise<any> {
+    console.log(`Sleeping for ${sleepDurationInSeconds} second(s)`);
+
+    return new Promise((resolve) => {
+        setTimeout(resolve, sleepDurationInSeconds * 1000);
+    });
+}
+
 
 run();

@@ -60,6 +60,14 @@
             "groupName": "advanced"
         },
         {
+            "name": "timestampServerDelay",
+            "type": "string",
+            "label": "Delay in seconds between signing actions per provider requests ",
+            "defaultValue": "15",
+            "required": true,
+            "groupName": "advanced"
+        },
+        {
             "name": "fileAlgo",
             "type": "pickList",
             "label": "File Digest Algo",
