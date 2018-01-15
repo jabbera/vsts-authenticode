@@ -129,7 +129,6 @@ function pushFileArgs(args: string[]) {
     };
 
     let matchedFiles: string[] = tl.findMatch(rootPath, filePath, null, options);
-     matchedFiles = matchedFiles.map((x) => `"${x}"`);
 
     args.push("/fd", fileAlgo);
 
