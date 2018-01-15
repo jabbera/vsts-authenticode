@@ -7,7 +7,6 @@ This task can authenticode sign binaries. If the certificate is in the user stor
   * Add delay between retries for timestamp server.
   * Make custom tool location actually work.
   * Support selecting certificate by SHA1 hash for stores
-  * Support multiple algorithms at once (SHA1 + SHA256 signing)
   * Support minimatch patterns instead of current scheme (breaking change)
 
 
