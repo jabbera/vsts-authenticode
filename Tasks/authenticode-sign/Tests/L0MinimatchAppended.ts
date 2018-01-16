@@ -30,7 +30,7 @@ let a: ma.TaskLibAnswers = <ma.TaskLibAnswers>{
         ],
     },
     "exec": {
-        "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe sign /tr http://timestamp.digicert.com /td sha256 /f c:\\vsts-authenticode\\Test\\a.pfx /p password /fd sha256 \"c:\\temp temp\\a.dll\" \"c:\\temp temp\\b.exe\"": {
+        "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe sign /tr http://timestamp.digicert.com /td sha256 /f c:\\vsts-authenticode\\Test\\a.pfx /p password /fd sha256 c:\\temp temp\\a.dll c:\\temp temp\\b.exe": {
             "code": 0,
             "stdout": "",
             "stderr": "",
