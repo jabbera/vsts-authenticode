@@ -25,7 +25,7 @@ let a: ma.TaskLibAnswers = <ma.TaskLibAnswers>{
         "doesntmatter": ["doesntmatter"],
     },
     "exec": {
-        "c:\\signtool.exe sign /tr http://tsserver.com /td sha256 /sm /a /fd sha256 \"doesntmatter\"": {
+        "c:\\signtool.exe sign /tr http://tsserver.com /td sha256 /sm /a /fd sha256 doesntmatter": {
             "code": 1,
             "stdout": "",
             "stderr": "",

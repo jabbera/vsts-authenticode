@@ -13,16 +13,20 @@
             "outFiles": ["${workspaceRoot}\\Tasks\\authenticode-sign\\*.js"],
             "sourceMaps": true,
             "env": {
-                // "INPUT_TOOLLOCATION": "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe"
+                "INPUT_TOOLLOCATION": "C:\\vsts-authenticode\\Tasks\\authenticode-sign\\x64\\signtool.exe",
                 "INPUT_TIMESTAMPSERVER": "http://timestamp.digicert.com",
                 "INPUT_TIMESTAMPALGO": "sha256",
                 "INPUT_FILEALGO": "sha256",
                 "INPUT_FILEPATH": "c:\\temp\\*.dll",
                 "INPUT_RETRYCOUNT": "5",
-                "INPUT_CERTIFICATELOCATION": "computerStore",
-                "INPUT_PFXPATH": "c:\\temp\\code.pfx",
-                //"INPUT_PFXPASSWORD": "passwordhere",
-                "PROCESSOR_ARCHITECTURE": "x64"
+                "INPUT_TIMESTAMPSERVERDELAY": "5",
+                "INPUT_CERTIFICATESELECTIONMETHOD": "auto",
+                "INPUT_SIGNROOTPATH": "${workspaceRoot}",
+                "INPUT_CERTIFICATELOCATION": "pfxFile",
+                "INPUT_PFXFILE": "c:\\temp\\code.pfx",
+                "INPUT_PFXPASSWORD": "password",
+                "PROCESSOR_ARCHITECTURE": "x64",
+                "TASK_TEST_TRACE": "true"
             }
         },
         {
