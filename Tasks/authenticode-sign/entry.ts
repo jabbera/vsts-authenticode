@@ -1,5 +1,5 @@
-import * as tr from "vsts-task-lib/ToolRunner";
 import * as tl from "vsts-task-lib/task";
+import * as tr from "vsts-task-lib/toolrunner";
 import * as sf from "./SecureFileHelpers";
 
 let secureFileId: string = null;
@@ -8,6 +8,7 @@ async function run() {
     try {
         let signToolLocation: string = getSignToolLocation();
         let retryCount: number = Number(tl.getInput("retryCount", true));
+        let timestampServerDelay: number = Number(tl.getInput("timestampServerDelay", true));
 
         let signtool: tr.ToolRunner = new tr.ToolRunner(signToolLocation);
 
@@ -31,7 +32,10 @@ async function run() {
             }
             catch (e) {
                 console.log(`Error attempting to sign. Attempt number: ${i++}. Exception text: ${e}`);
-                if (i === retryCount) {
+
+                await sleepFor(timestampServerDelay);
+
+                if (i >= retryCount) {
                     tl.setResult(tl.TaskResult.Failed, `Unable to sign ${e}`);
                     throw e;
                 }
@@ -56,15 +60,31 @@ function pushTimestampArgs(args: string[]) {
     args.push("/tr", timestampServer, "/td", timestampAlgo);
 }
 
+function pushCertStoreArgs(certificateLocation: string, args: string[]): boolean {
+    switch (certificateLocation) {
+        case "computerStore":
+            args.push("/sm");
+        case "userStore":
+            let certificateSelectionMethod: string = tl.getInput("certificateSelectionMethod", true);
+            if (certificateSelectionMethod === "auto") {
+                args.push("/a");
+            }
+
+            if (certificateSelectionMethod === "sha1") {
+                args.push("/sha1", tl.getInput("certificateThumbprint", true));
+            }
+
+            return true;
+        default:
+            return false;
+    }
+}
+
 async function pushCertArgs(args: string[]) {
     let certificateLocation: string = tl.getInput("certificateLocation", true);
-    if (certificateLocation === "computerStore") {
-        args.push("/sm");
+    if (pushCertStoreArgs(certificateLocation, args)) {
+        // Handled by the above method
         return;
-    }
-
-    if (certificateLocation === "userStore") {
-        return; // Nothing to do.
     }
 
     let pfxLocation: string = null;
@@ -98,15 +118,28 @@ async function pushCertArgs(args: string[]) {
 
 function pushFileArgs(args: string[]) {
     let fileAlgo: string = tl.getInput("fileAlgo", true);
-    let filePath: string = tl.getInput("filePath", true);
+    let filePath: string[] = tl.getDelimitedInput("filePath", "\n", true);
+    let rootPath: string = tl.getInput("signRootPath", true);
 
-    args.push("/fd", fileAlgo, "/a", filePath);
+    let options: tl.MatchOptions = {
+        debug: Boolean(tl.getVariable("system.debug")),
+        dot: true,
+        nobrace: true,
+        nocase: process.platform === "win32",
+    };
+
+    let matchedFiles: string[] = tl.findMatch(rootPath, filePath, null, options);
+
+    args.push("/fd", fileAlgo);
+
+    Array.prototype.push.apply(args, matchedFiles);
 }
 
 function getSignToolLocation(): string {
-    let toolLocation: string = tl.getInput("toolLocation", false);
+    let toolLocation: string = tl.getInput("signToolLocation", false);
     if (toolLocation != null && toolLocation !== "") {
         tl.debug(`custom signtool location: ${toolLocation}`);
+        tl.checkPath(toolLocation, "custom tool location");
         return toolLocation;
     }
 
@@ -151,5 +184,14 @@ function getPlatformFolder(): string {
 
     return folder;
 }
+
+async function sleepFor(sleepDurationInSeconds): Promise<any> {
+    console.log(`Sleeping for ${sleepDurationInSeconds} second(s)`);
+
+    return new Promise((resolve) => {
+        setTimeout(resolve, sleepDurationInSeconds * 1000);
+    });
+}
+
 
 run();
