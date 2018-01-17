@@ -122,7 +122,7 @@ function pushFileArgs(args: string[]) {
     let rootPath: string = tl.getInput("signRootPath", true);
 
     let options: tl.MatchOptions = {
-        debug: Boolean(tl.getVariable("system.debug")),
+        debug: false,
         dot: true,
         nobrace: true,
         nocase: process.platform === "win32",
