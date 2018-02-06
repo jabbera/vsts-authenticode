@@ -158,6 +158,14 @@
             "required": true,
             "helpMarkDown": "Pfx Password.",
             "visibleRule": "certificateLocation = pfxFile || certificateLocation = secureFile"
+        },
+        {
+            "name": "additionalArguments",
+            "type": "multiLine",
+            "label": "Additional arguments",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Additional arguments to be passed to signtoolexe, one per l"
         }
     ],
     "execution": {

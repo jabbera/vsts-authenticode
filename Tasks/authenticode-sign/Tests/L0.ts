@@ -63,4 +63,15 @@ describe("Authenticode sign test suite", () => {
     done();
   });
 
+  it("additional Args works", (done) => {
+    const testPath: string = path.join(__dirname, "L0AdditionalArgsWoks.js");
+    const testRunner: ttm.MockTestRunner = new ttm.MockTestRunner(testPath);
+
+    testRunner.run();
+
+    expect(testRunner.succeeded).true;
+
+    done();
+  });
+
 });

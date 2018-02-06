@@ -17,6 +17,7 @@ async function run() {
         pushTimestampArgs(signtoolArguments);
 
         await pushCertArgs(signtoolArguments);
+        pushAdditionalArgs(signtoolArguments);
         pushFileArgs(signtoolArguments);
 
         signtool.arg(signtoolArguments);
@@ -133,6 +134,15 @@ function pushFileArgs(args: string[]) {
     args.push("/fd", fileAlgo);
 
     Array.prototype.push.apply(args, matchedFiles);
+}
+
+function pushAdditionalArgs(args: string[]) {
+    let additionalArgs: string[] = tl.getDelimitedInput("additionalArguments", "\r", false);
+    if (additionalArgs === null || additionalArgs.length === 0) {
+        return;
+    }
+
+    Array.prototype.push.apply(args, additionalArgs);
 }
 
 function getSignToolLocation(): string {
