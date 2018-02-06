@@ -1,7 +1,8 @@
 # Authenticode sign
 
 This task can authenticode sign binaries. If the certificate is in the user store it just works. Now supporting securefile.
-
+* Version 3.0
+  * Support custom arguments
 *  Version 2.0
   * Fix bug inverting the selection of user store and computer store (this is a breaking change).
   * Add delay between retries for timestamp server.
