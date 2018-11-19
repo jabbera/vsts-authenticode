@@ -165,7 +165,7 @@
             "label": "Additional arguments",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Additional arguments to be passed to signtoolexe, one per l"
+            "helpMarkDown": "Additional arguments to be passed to signtoolexe. One per line. Arguments with spaces will be quoted."
         }
     ],
     "execution": {
