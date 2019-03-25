@@ -137,7 +137,7 @@ function pushFileArgs(args: string[]) {
 }
 
 function pushAdditionalArgs(args: string[]) {
-    let additionalArgs: string[] = tl.getDelimitedInput("additionalArguments", "\r", false);
+    let additionalArgs: string[] = tl.getDelimitedInput("additionalArguments", "\n", false);
     if (additionalArgs === null || additionalArgs.length === 0) {
         return;
     }

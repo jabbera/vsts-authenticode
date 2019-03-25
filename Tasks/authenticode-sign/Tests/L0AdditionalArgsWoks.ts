@@ -17,7 +17,7 @@ tr.setInput("certificateSelectionMethod", "sha1");
 tr.setInput("certificateThumbprint", "thumbprint");
 tr.setInput("filePath", "doesntmatter");
 tr.setInput("signRootPath", "c:\\temp temp");
-tr.setInput("additionalArguments", "/as\r/as1");
+tr.setInput("additionalArguments", "/as\n/as1");
 
 let a: ma.TaskLibAnswers = <ma.TaskLibAnswers>{
     "checkPath" : {
