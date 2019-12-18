@@ -1,7 +1,7 @@
+import * as vsts from "azure-devops-node-api";
+import tl = require("azure-pipelines-task-lib/task");
 import fs = require("fs");
 import Q = require("q");
-import tl = require("vsts-task-lib/task");
-import vsts = require("vso-node-api");
 
 export class SecureFileHelpers {
     serverConnection: vsts.WebApi;

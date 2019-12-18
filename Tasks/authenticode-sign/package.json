@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "vso-node-api": "^6.2.8-preview",
-    "vsts-task-lib": "^2.1.0"
+    "azure-devops-node-api": "^9.0.1",
+    "azure-pipelines-task-lib": "^2.9.3"
   }
 }
