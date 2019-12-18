@@ -24,8 +24,10 @@ export class SecureFileHelpers {
         tl.debug("Downloading secure file contents to: " + tempDownloadPath);
         let file: NodeJS.WritableStream = fs.createWriteStream(tempDownloadPath);
 
-        let stream = (await this.serverConnection.getTaskAgentApi().downloadSecureFile(
-            tl.getVariable("SYSTEM.TEAMPROJECT"), secureFileId, tl.getSecureFileTicket(secureFileId), false)).pipe(file);
+        const task = await this.serverConnection.getTaskAgentApi();
+        let stream = await task.downloadSecureFile(
+            tl.getVariable("SYSTEM.TEAMPROJECT"), secureFileId, tl.getSecureFileTicket(secureFileId), false);
+        stream.pipe(file);
         let defer = Q.defer();
         stream.on("finish", () => {
             defer.resolve();
