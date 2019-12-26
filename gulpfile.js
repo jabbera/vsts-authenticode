@@ -7,27 +7,28 @@ var tsProject = ts.createProject('tsconfig.json');
 var exitOnError = require('yargs').argv.exitOnError;
 let errorCount = 0;
 
-gulp.task('compile', function() {
-    
+gulp.task('compile', function () {
+
     return tsProject.src()
         .pipe(sourcemaps.init())
         .pipe(tsProject())
-        .once("error", function() { 
+        .once("error", function () {
             this.once("finish", () => {
                 if (exitOnError) {
                     process.exit(1);
                 }
-            })}
-        ).js        
-        .pipe(sourcemaps.write(".", {sourceRoot: ""}))
+            })
+        }
+        ).js
+        .pipe(sourcemaps.write(".", { sourceRoot: "" }))
         .pipe(gulp.dest('Tasks/authenticode-sign'));
 });
 
-gulp.task('build', ['compile'], function() {
+gulp.task('build', gulp.series('compile', function () {
     return gulp.src(['Tasks/common/*', '!Tasks/common/*.ts'])
         .pipe(gulp.dest('Tasks/authenticode-sign/'))
-});
+}));
 
-gulp.task('watch', ['build'], function() {
+gulp.task('watch', gulp.series('build', function () {
     gulp.watch(tsPaths.include, ['build']);
-});
+}));
