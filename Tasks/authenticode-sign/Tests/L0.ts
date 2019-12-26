@@ -2,7 +2,7 @@
 import { expect } from "chai";
 import "mocha";
 import path = require("path");
-import * as ttm from "vsts-task-lib/mock-test";
+import * as ttm from "azure-pipelines-task-lib/mock-test";
 
 /* tslint:disable:no-unused-expression */
 

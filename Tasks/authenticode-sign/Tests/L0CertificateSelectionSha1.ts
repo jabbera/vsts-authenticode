@@ -1,7 +1,7 @@
 import path = require("path");
-import ma = require("vsts-task-lib/mock-answer");
-import tmrm = require("vsts-task-lib/mock-run");
-// import mockTask = require("vsts-task-lib/mock-task");
+import ma = require("azure-pipelines-task-lib/mock-answer");
+import tmrm = require("azure-pipelines-task-lib/mock-run");
+// import mockTask = require("azure-pipelines-task-lib/mock-task");
 
 const taskPath = path.join(__dirname, "..", "entry.js");
 const tr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
@@ -35,6 +35,6 @@ let a: ma.TaskLibAnswers = <ma.TaskLibAnswers>{
 };
 
 tr.setAnswers(a);
-tr.registerMock("vsts-task-lib/toolrunner", require("vsts-task-lib/mock-toolrunner"));
+tr.registerMock("azure-pipelines-task-lib/toolrunner", require("azure-pipelines-task-lib/mock-toolrunner"));
 
 tr.run();

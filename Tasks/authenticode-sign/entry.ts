@@ -1,5 +1,5 @@
-import * as tl from "vsts-task-lib/task";
-import * as tr from "vsts-task-lib/toolrunner";
+import * as tl from "azure-pipelines-task-lib/task";
+import * as tr from "azure-pipelines-task-lib/toolrunner";
 import * as sf from "./SecureFileHelpers";
 
 let secureFileId: string = null;

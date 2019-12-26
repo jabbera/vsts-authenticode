@@ -1,7 +1,7 @@
+import * as vsts from "azure-devops-node-api";
+import tl = require("azure-pipelines-task-lib/task");
 import fs = require("fs");
 import Q = require("q");
-import tl = require("vsts-task-lib/task");
-import vsts = require("vso-node-api");
 
 export class SecureFileHelpers {
     serverConnection: vsts.WebApi;
@@ -24,8 +24,10 @@ export class SecureFileHelpers {
         tl.debug("Downloading secure file contents to: " + tempDownloadPath);
         let file: NodeJS.WritableStream = fs.createWriteStream(tempDownloadPath);
 
-        let stream = (await this.serverConnection.getTaskAgentApi().downloadSecureFile(
-            tl.getVariable("SYSTEM.TEAMPROJECT"), secureFileId, tl.getSecureFileTicket(secureFileId), false)).pipe(file);
+        const task = await this.serverConnection.getTaskAgentApi();
+        let stream = await task.downloadSecureFile(
+            tl.getVariable("SYSTEM.TEAMPROJECT"), secureFileId, tl.getSecureFileTicket(secureFileId), false);
+        stream.pipe(file);
         let defer = Q.defer();
         stream.on("finish", () => {
             defer.resolve();
