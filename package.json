@@ -14,21 +14,21 @@
   "homepage": "https://github.com/jabbera/vsts-authenticode#readme",
   "devDependencies": {
     "@types/chai": "^4.1.0",
-    "@types/mocha": "^2.2.46",
-    "@types/node": "^7.0.18",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.7",
     "chai": "^4.1.2",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-sourcemaps": "^2.6.0",
-    "gulp-typescript": "^3.1.7",
-    "mocha": "^4.1.0",
-    "tfx-cli": "^0.4.5",
-    "ts-node": "^4.1.0",
+    "gulp-typescript": "^5.0.1",
+    "mocha": "^6.2.2",
+    "tfx-cli": "^0.7.11",
+    "ts-node": "^8.5.4",
     "tslint": "^5.7.0",
-    "typescript": "^2.5.2",
-    "yargs": "^8.0.2"
+    "typescript": "^3.7.4",
+    "yargs": "^15.0.2"
   },
   "dependencies": {
-    "vso-node-api": "^6.2.8-preview",
-    "vsts-task-lib": "^2.1.0"
+    "azure-devops-node-api": "^9.0.1",
+    "azure-pipelines-task-lib": "^2.9.3"
   }
 }
