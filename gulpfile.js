@@ -30,5 +30,5 @@ gulp.task('build', gulp.series('compile', function () {
 }));
 
 gulp.task('watch', gulp.series('build', function () {
-    gulp.watch(tsPaths.include, ['build']);
+    gulp.watch(tsPaths.include, gulp.series('build'));
 }));
