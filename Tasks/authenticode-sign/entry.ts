@@ -45,7 +45,6 @@ async function run() {
     }
     catch (e) {
         tl.setResult(tl.TaskResult.Failed, `Unable to sign ${e}`);
-        throw e;
     }
     finally {
         if (secureFileId && secureFileHelpers) {
