@@ -20,7 +20,7 @@
     "gulp": "^4.0.2",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-typescript": "^5.0.1",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "sync-request": "^6.1.0",
     "tfx-cli": "^0.7.11",
     "ts-node": "^8.5.4",
